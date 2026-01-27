@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<title>Stalker UA Mods — Найкращі моди українською</title>
+<meta name="description" content="Каталог українських модифікацій для S.T.A.L.K.E.R. Тінь Чорнобиля, Чисте Небо, Поклик Прип'яті.">
+    <meta charset="UTF-8">
+    <title>stalkrerUA-MODS | Головна</title>
+    <style>
+        /* Додаємо змінні для світлої теми */
+        .light-theme {
+            filter: invert(0.9) hue-rotate(180deg);
+        }
+        .light-theme img {
+            filter: invert(1) hue-rotate(180deg);
+        }
+
+        body {
+            margin: 0; padding: 0; font-family: 'Courier New', monospace; color: #c2c2c2;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.7)), url('2.webp');
+            background-size: cover; background-position: center; background-attachment: fixed;
+            min-height: 100vh; overflow-x: hidden;
+        }
+        
+        header { padding: 40px; text-align: left; position: relative; z-index: 2; }
+        .site-title {
+            font-size: 3.5rem; font-weight: 900; text-transform: uppercase;
+            background: linear-gradient(to bottom, #0057b7 50%, #ffd700 50%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.8)); margin: 0;
+        }
+
+        .auth-btn { position: fixed; top: 20px; right: 150px; z-index: 100; background: rgba(0,0,0,0.8); color: #ffd700; border: 1px solid #ffd700; padding: 10px 20px; cursor: pointer; text-transform: uppercase; font-weight: bold; }
+        
+        /* Кнопка опцій */
+        .options-btn { position: fixed; top: 20px; right: 20px; z-index: 100; background: rgba(0,0,0,0.8); color: #ffd700; border: 1px solid #ffd700; padding: 10px 20px; cursor: pointer; text-transform: uppercase; font-weight: bold; }
+
+        .main-content { position: relative; z-index: 2; padding: 20px 40px; display: flex; flex-direction: column; gap: 15px; background: rgba(0, 0, 0, 0.4); border-radius: 20px; margin: 20px; }
+        .game-card { background: rgba(20, 20, 20, 0.9); padding: 25px; border-left: 6px solid #ffd700; display: flex; align-items: center; gap: 20px; border-radius: 0 15px 15px 0; transition: 0.4s; cursor: pointer; max-width: 500px; margin-bottom: 15px; }
+        .game-card:hover { transform: translateX(15px); background: rgba(0, 87, 183, 0.15); border-left-color: #0057b7; }
+        .icon-box { min-width: 50px; height: 50px; border: 2px solid #ffd700; display: flex; align-items: center; justify-content: center; color: #ffd700; font-weight: bold; border-radius: 8px; }
+
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); }
+        .modal-content { background: #0a0a0a; margin: 2% auto; padding: 30px; border: 2px solid #ffcc00; width: 90%; max-width: 1000px; border-radius: 10px; height: 85vh; overflow-y: scroll; position: relative; }
+        .close { color: #fff; position: absolute; right: 25px; top: 15px; font-size: 40px; cursor: pointer; }
+
+        .dl-link { background: #ffd700; color: #000; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header><h1 class="site-title" id="site-title">stalkrerUA-MODS</h1></header>
+    
+    <div class="auth-btn" onclick="openRegModal()" id="auth-btn">Реєстрація / Вхід</div>
+    <div class="options-btn" onclick="openOptionsModal()" id="opt-btn">Опції</div>
+
+    <div class="main-content" style="display: flex; flex-direction: row; align-items: flex-start; gap: 40px; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 300px;">
+            <div class="game-card" onclick="openModModal('tch')">
+                <div class="icon-box">ТЧ</div>
+                <div class="game-info"><h2 id="tch-name">Тінь Чорнобиля</h2><p id="tch-sub">Натисни для вибору моду</p></div>
+            </div>
+            <div class="game-card" onclick="openModModal('cn')">
+                <div class="icon-box">ЧН</div>
+                <div class="game-info"><h2 id="cn-name">Чисте Небо</h2><p id="cn-sub">Натисни для вибору моду</p></div>
+            </div>
+            <div class="game-card" onclick="openModModal('zp')">
+                <div class="icon-box">ЗП</div>
+                <div class="game-info"><h2 id="zp-name">Поклик Прип'яті</h2><p id="zp-sub">Натисни для вибору моду</p></div>
+            </div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+            <img src="1.jpg" style="width: 100%; max-width: 600px; border: 2px solid #ffd700; border-radius: 15px;">
+        </div>
+    </div>
+
+    <div id="optionsModal" class="modal">
+        <div class="modal-content" style="max-width: 400px; height: auto;">
+            <span class="close" onclick="closeModal('optionsModal')">&times;</span>
+            <h2 style="color:#ffd700">Налаштування</h2>
+            <p>Мова: 
+                <select id="langSelect" onchange="changeLanguage()" style="padding: 5px;">
+                    <option value="uk">Українська</option>
+                    <option value="en">English</option>
+                </select>
+            </p>
+            <p>Тема: <button onclick="document.body.classList.toggle('light-theme')" style="padding: 5px 15px; cursor:pointer;">Змінити тему</button></p>
+        </div>
+    </div>
+
+    <div id="regModal" class="modal">
+        <div class="modal-content" style="max-width: 450px; height: auto;">
+            <span class="close" onclick="closeModal('regModal')">&times;</span>
+            <h2 style="color: #ffd700; text-align: center;">Реєстрація</h2>
+            <input type="text" placeholder="Логін" style="width:100%; padding:10px; margin-bottom:10px;">
+            <button style="width:100%; padding:10px; background:#ffd700; border:none; cursor:pointer;">OK</button>
+        </div>
+    </div>
+
+    <script>
+        function openOptionsModal() { document.getElementById('optionsModal').style.display = "block"; }
+        function openRegModal() { document.getElementById('regModal').style.display = "block"; }
+        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+
+        function changeLanguage() {
+            const lang = document.getElementById('langSelect').value;
+            if (lang === 'en') {
+                document.getElementById('site-title').innerText = "STALKER-UA-MODS";
+                document.getElementById('auth-btn').innerText = "Login / Reg";
+                document.getElementById('opt-btn').innerText = "Options";
+                document.getElementById('tch-name').innerText = "Shadow of Chernobyl";
+                document.getElementById('cn-name').innerText = "Clear Sky";
+                document.getElementById('zp-name').innerText = "Call of Pripyat";
+            } else {
+                location.reload();
+            }
+        }
+
+        window.onclick = function(e) {
+            if(e.target.className === 'modal') e.target.style.display = "none";
+        }
+    </script>
+</body>
+</html>
