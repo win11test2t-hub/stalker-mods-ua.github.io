@@ -1,123 +1,1083 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<title>Stalker UA Mods — Найкращі моди українською</title>
-<meta name="description" content="Каталог українських модифікацій для S.T.A.L.K.E.R. Тінь Чорнобиля, Чисте Небо, Поклик Прип'яті.">
     <meta charset="UTF-8">
-    <title>stalkrerUA-MODS | Головна</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>modLab-x: Ultimate PDA</title>
     <style>
-        /* Додаємо змінні для світлої теми */
-        .light-theme {
-            filter: invert(0.9) hue-rotate(180deg);
-        }
-        .light-theme img {
-            filter: invert(1) hue-rotate(180deg);
+        :root { --yellow: #ffed00; --red: #ff3333; --neon: #00e5ff; --green: #00ff00; } 
+
+        body, html { 
+            margin: 0; padding: 0; height: 100%; 
+            background: #000; font-family: 'Arial Black', sans-serif; 
+            color: white; overflow: hidden; 
         }
 
-        body {
-            margin: 0; padding: 0; font-family: 'Courier New', monospace; color: #c2c2c2;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(0, 0, 0, 0.7)), url('2.webp');
-            background-size: cover; background-position: center; background-attachment: fixed;
-            min-height: 100vh; overflow-x: hidden;
+        /* Фон - ефект аномалії */
+        .bg-layer {
+            position: fixed; top: -5%; left: -5%; width: 110%; height: 110%;
+            background: url('1.jpg') no-repeat center center;
+            background-size: cover; z-index: 1;
+            animation: anomalyDistortion 15s ease-in-out infinite;
+            filter: brightness(0.8) contrast(1.1);
+        }
+
+        @keyframes anomalyDistortion {
+            0%, 100% { transform: scale(1) rotate(0deg); filter: brightness(0.8) contrast(1.1) hue-rotate(0deg); }
+            25% { transform: scale(1.02) rotate(0.3deg); filter: brightness(0.85) contrast(1.15) hue-rotate(2deg); }
+            50% { transform: scale(1.01) rotate(-0.2deg); filter: brightness(0.9) contrast(1.1) hue-rotate(-2deg); }
+            75% { transform: scale(1.03) rotate(0.2deg); filter: brightness(0.82) contrast(1.12) hue-rotate(1deg); }
+        }
+
+        /* Табло рангу - глітч ефект */
+        .rank-board {
+            position: fixed; top: 15px; right: 20px; z-index: 2000;
+            background: rgba(0,0,0,0.85); border: 2px solid var(--yellow);
+            padding: 10px 15px; border-radius: 5px; font-family: 'Courier New', monospace;
+            animation: rankGlitch 8s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255,237,0,0.3), inset 0 0 10px rgba(255,237,0,0.1);
+        }
+
+        @keyframes rankGlitch {
+            0%, 90%, 100% { transform: translate(0, 0); opacity: 1; }
+            91% { transform: translate(-2px, 1px); opacity: 0.95; }
+            92% { transform: translate(2px, -1px); opacity: 0.9; }
+            93% { transform: translate(-1px, 2px); opacity: 1; }
+        }
+
+        .fullscreen-bg { 
+            position: relative; z-index: 10; height: 100vh; 
+            display: flex; flex-direction: column; background: rgba(0,0,0,0.6);
+            animation: pageLoad 1s ease-out;
+        }
+
+        @keyframes pageLoad {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Заголовок - енергетична пульсація */
+        .header-section { 
+            position: relative; z-index: 50; padding: 15px 0; text-align: center;
+            animation: headerPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes headerPulse {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(255,237,0,0.4)); }
+            50% { filter: drop-shadow(0 0 40px rgba(255,237,0,0.7)) drop-shadow(0 0 60px rgba(255,237,0,0.3)); }
+        }
+
+        .title { 
+            font-size: 3.5rem; margin: 0; cursor: pointer; pointer-events: auto;
+            animation: titleFlicker 5s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(255,237,0,0.8), 0 0 20px rgba(255,237,0,0.5), 0 0 30px rgba(255,237,0,0.3);
+        }
+
+        @keyframes titleFlicker {
+            0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(255,237,0,0.8), 0 0 20px rgba(255,237,0,0.5); }
+            5% { opacity: 0.95; }
+            10% { opacity: 1; }
+            15% { opacity: 0.97; text-shadow: 0 0 15px rgba(255,237,0,0.9), 0 0 30px rgba(255,237,0,0.6); }
+            20%, 95% { opacity: 1; text-shadow: 0 0 10px rgba(255,237,0,0.8), 0 0 20px rgba(255,237,0,0.5); }
+        }
+
+        .quote-sub { 
+            font-family: 'Courier New', monospace; color: #aaa; font-style: italic; font-size: 0.9rem; margin-top: 5px;
+        }
+
+        /* Градієнтні полоски */
+        .gradient-bar {
+            height: 4px;
+            background: linear-gradient(90deg, var(--yellow), var(--neon), var(--yellow));
+            background-size: 200% 100%;
+            animation: gradientFlow 3s linear infinite;
+            box-shadow: 0 0 10px rgba(255,237,0,0.5), 0 0 20px rgba(0,229,255,0.3);
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .gradient-border-frame {
+            position: relative;
+            padding: 3px;
+            background: linear-gradient(90deg, var(--yellow), var(--neon), var(--yellow));
+            background-size: 200% 100%;
+            animation: gradientFlow 3s linear infinite;
+            box-shadow: 0 0 15px rgba(255,237,0,0.4), 0 0 25px rgba(0,229,255,0.3);
+        }
+
+        .gradient-border-content {
+            background: rgba(15, 15, 15, 0.95);
+            padding: 12px;
+        }
+
+        /* Автор - великий і помітний */
+        .author-section {
+            position: relative;
+            z-index: 50;
+            padding: 30px 0;
+            text-align: center;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,237,0,0.1) 50%, transparent 100%);
+        }
+
+        .author-text {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, var(--yellow), #fff, var(--neon), var(--yellow));
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: authorShine 4s linear infinite;
+            text-shadow: 0 0 30px rgba(255,237,0,0.8);
+            filter: drop-shadow(0 0 20px rgba(255,237,0,0.6)) drop-shadow(0 0 30px rgba(0,229,255,0.4));
+            letter-spacing: 3px;
+        }
+
+        @keyframes authorShine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+
+        /* ПАНЕЛЬ КНОПОК - плаваюча левітація з різними затримками */
+        .panel { 
+            position: relative; z-index: 50; width: 100%; 
+            display: grid; grid-template-columns: repeat(3, 270px); 
+            gap: 15px; justify-content: center; align-content: center;
+            margin-bottom: 20px;
+        }
+
+        /* Спеціальні кнопки вгорі */
+        .special-buttons {
+            position: relative;
+            z-index: 50;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .special-btn-wrapper {
+            width: 280px;
         }
         
-        header { padding: 40px; text-align: left; position: relative; z-index: 2; }
-        .site-title {
-            font-size: 3.5rem; font-weight: 900; text-transform: uppercase;
-            background: linear-gradient(to bottom, #0057b7 50%, #ffd700 50%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.8)); margin: 0;
+        .card-btn { 
+            display: flex; align-items: center; background: rgba(15, 15, 15, 0.95); 
+            border: 2px solid var(--yellow); padding: 12px; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            font-size: 0.75rem; text-transform: uppercase; cursor: pointer;
+            position: relative; overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5), inset 0 0 10px rgba(255,237,0,0.05);
         }
 
-        .auth-btn { position: fixed; top: 20px; right: 150px; z-index: 100; background: rgba(0,0,0,0.8); color: #ffd700; border: 1px solid #ffd700; padding: 10px 20px; cursor: pointer; text-transform: uppercase; font-weight: bold; }
+        /* Різні анімації для кожної кнопки */
+        .card-btn:nth-child(1) { animation: float1 4s ease-in-out infinite; }
+        .card-btn:nth-child(2) { animation: float2 4.5s ease-in-out infinite 0.2s; }
+        .card-btn:nth-child(3) { animation: float3 3.8s ease-in-out infinite 0.4s; }
+        .card-btn:nth-child(4) { animation: float4 4.2s ease-in-out infinite 0.6s; }
+        .card-btn:nth-child(5) { animation: float1 4.3s ease-in-out infinite 0.8s; }
+        .card-btn:nth-child(6) { animation: float2 3.9s ease-in-out infinite 1s; }
+        .card-btn:nth-child(7) { animation: float3 4.1s ease-in-out infinite 1.2s; }
+        .card-btn:nth-child(8) { animation: float4 4.4s ease-in-out infinite 1.4s; }
+        .card-btn:nth-child(9) { animation: float1 3.7s ease-in-out infinite 1.6s; }
+
+        @keyframes float1 {
+            0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+            25% { transform: translateY(-12px) translateX(2px) rotate(0.5deg); }
+            50% { transform: translateY(-8px) translateX(-2px) rotate(-0.3deg); }
+            75% { transform: translateY(-15px) translateX(1px) rotate(0.2deg); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+            33% { transform: translateY(-10px) translateX(-3px) scale(1.01); }
+            66% { transform: translateY(-14px) translateX(2px) scale(0.99); }
+        }
+
+        @keyframes float3 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-18px) rotate(0.8deg); }
+        }
+
+        @keyframes float4 {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            40% { transform: translateY(-11px) translateX(3px); }
+            80% { transform: translateY(-16px) translateX(-2px); }
+        }
+
+        /* Світіння при наведенні - ефект артефакту */
+        .card-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,237,0,0.3) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .card-btn:hover::before {
+            opacity: 1;
+            animation: artifactGlow 1.5s ease-in-out infinite;
+        }
+
+        @keyframes artifactGlow {
+            0%, 100% { transform: scale(0.8) rotate(0deg); opacity: 0.3; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 0.6; }
+        }
+
+        .card-btn:hover { 
+            background: var(--yellow); 
+            color: black; 
+            transform: scale(1.08) translateY(-5px) !important; 
+            box-shadow: 0 10px 30px rgba(255,237,0,0.5), 0 0 40px rgba(255,237,0,0.3), inset 0 0 20px rgba(255,255,255,0.2);
+            border-color: #fff;
+        }
+
+        .icon-square { 
+            width: 35px; height: 35px; background: var(--yellow); color: black; 
+            display: flex; justify-content: center; align-items: center; 
+            margin-right: 10px; font-weight: bold;
+            animation: iconPulse 2s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(255,237,0,0.5);
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(255,237,0,0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(255,237,0,0.8); }
+        }
+
+        /* МОДАЛКИ */
+        .modal { 
+            display: none; position: fixed; z-index: 5000; left: 0; top: 0; 
+            width: 100vw; height: 100vh; background: #000;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .game-top { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 0 20px; border-bottom: 2px solid var(--yellow); height: 60px;
+            background: linear-gradient(180deg, rgba(255,237,0,0.1) 0%, transparent 100%);
+        }
+
+        .scroll-area { 
+            height: calc(100vh - 60px); overflow-y: auto; 
+            display: flex; flex-direction: column; align-items: center; 
+        }
         
-        /* Кнопка опцій */
-        .options-btn { position: fixed; top: 20px; right: 20px; z-index: 100; background: rgba(0,0,0,0.8); color: #ffd700; border: 1px solid #ffd700; padding: 10px 20px; cursor: pointer; text-transform: uppercase; font-weight: bold; }
+        .site-crop { width: 95%; height: 5000px; margin-top: -525px; position: relative; }
+        
+        iframe { 
+            width: 100%; height: 100%; border: 2px solid var(--neon); background: white;
+            animation: iframeGlow 2s ease-in-out infinite;
+        }
 
-        .main-content { position: relative; z-index: 2; padding: 20px 40px; display: flex; flex-direction: column; gap: 15px; background: rgba(0, 0, 0, 0.4); border-radius: 20px; margin: 20px; }
-        .game-card { background: rgba(20, 20, 20, 0.9); padding: 25px; border-left: 6px solid #ffd700; display: flex; align-items: center; gap: 20px; border-radius: 0 15px 15px 0; transition: 0.4s; cursor: pointer; max-width: 500px; margin-bottom: 15px; }
-        .game-card:hover { transform: translateX(15px); background: rgba(0, 87, 183, 0.15); border-left-color: #0057b7; }
-        .icon-box { min-width: 50px; height: 50px; border: 2px solid #ffd700; display: flex; align-items: center; justify-content: center; color: #ffd700; font-weight: bold; border-radius: 8px; }
+        @keyframes iframeGlow {
+            0%, 100% { box-shadow: 0 0 10px rgba(0,229,255,0.3); }
+            50% { box-shadow: 0 0 25px rgba(0,229,255,0.6), 0 0 40px rgba(0,229,255,0.3); }
+        }
 
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); }
-        .modal-content { background: #0a0a0a; margin: 2% auto; padding: 30px; border: 2px solid #ffcc00; width: 90%; max-width: 1000px; border-radius: 10px; height: 85vh; overflow-y: scroll; position: relative; }
-        .close { color: #fff; position: absolute; right: 25px; top: 15px; font-size: 40px; cursor: pointer; }
+        .back-btn { 
+            background: var(--red); color: white; padding: 8px 20px; 
+            border: 1px solid white; font-weight: bold; cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-        .dl-link { background: #ffd700; color: #000; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; }
+        .back-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .back-btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .back-btn:hover {
+            background: #cc0000;
+            box-shadow: 0 0 20px rgba(255,51,51,0.6);
+            transform: scale(1.05);
+        }
+
+        /* Блискуча анімація тексту */
+        .shine-text { 
+            text-transform: uppercase; 
+            background: linear-gradient(90deg, var(--yellow), #fff, var(--yellow)); 
+            background-size: 200% auto; -webkit-background-clip: text; background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            animation: shine 3s linear infinite, shineGlow 2s ease-in-out infinite; 
+        }
+
+        @keyframes shine { 
+            to { background-position: 200% center; } 
+        }
+
+        @keyframes shineGlow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(255,237,0,0.5)); }
+            50% { filter: drop-shadow(0 0 15px rgba(255,237,0,0.8)); }
+        }
+
+        /* МІНІ-ГРА */
+        #game-modal { 
+            display: none; position: fixed; z-index: 6000; 
+            left: 0; top: 0; width: 100vw; height: 100vh; background: #000;
+        }
+        
+        .game-container { width: 100%; height: 100%; display: flex; }
+        
+        .game-area {
+            flex: 1;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            animation: gameAreaBreathing 8s ease-in-out infinite;
+        }
+
+        @keyframes gameAreaBreathing {
+            0%, 100% { filter: brightness(1) saturate(1); }
+            50% { filter: brightness(1.1) saturate(1.15); }
+        }
+
+        /* Артефакт - обертання і магнітний ефект */
+        .artifact {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            pointer-events: auto;
+            animation: artifactFloat 3s ease-in-out infinite, artifactRotate 8s linear infinite;
+            filter: drop-shadow(0 0 15px rgba(0,229,255,0.7)) drop-shadow(0 0 25px rgba(0,229,255,0.4));
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        @keyframes artifactFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.1); }
+        }
+
+        @keyframes artifactRotate {
+            from { filter: drop-shadow(0 0 15px rgba(0,229,255,0.7)) hue-rotate(0deg); }
+            to { filter: drop-shadow(0 0 15px rgba(0,229,255,0.7)) hue-rotate(360deg); }
+        }
+
+        .artifact:hover {
+            transform: scale(1.3) rotate(15deg) !important;
+            filter: drop-shadow(0 0 25px rgba(0,255,0,0.9)) drop-shadow(0 0 40px rgba(0,255,0,0.5));
+            animation: artifactHover 0.5s ease-in-out infinite;
+        }
+
+        @keyframes artifactHover {
+            0%, 100% { transform: scale(1.3) rotate(15deg); }
+            50% { transform: scale(1.4) rotate(20deg); }
+        }
+
+        .game-sidebar {
+            width: 280px;
+            background: rgba(0,0,0,0.9);
+            border-left: 3px solid var(--yellow);
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: -10px 0 30px rgba(255,237,0,0.2);
+        }
+
+        .game-menu-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .inventory-section {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255,237,0,0.1);
+            border: 2px solid var(--yellow);
+            animation: inventoryPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes inventoryPulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(255,237,0,0.2); }
+            50% { box-shadow: 0 0 20px rgba(255,237,0,0.4), inset 0 0 10px rgba(255,237,0,0.1); }
+        }
+
+        .inventory-slot {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #555;
+            display: inline-block;
+            margin: 5px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transition: all 0.3s ease;
+            animation: slotBlink 3s ease-in-out infinite;
+        }
+
+        @keyframes slotBlink {
+            0%, 100% { border-color: #555; }
+            50% { border-color: #777; }
+        }
+
+        .inventory-slot.filled {
+            border-color: var(--green);
+            animation: slotFilled 2s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(0,255,0,0.4);
+        }
+
+        @keyframes slotFilled {
+            0%, 100% { box-shadow: 0 0 10px rgba(0,255,0,0.4); transform: scale(1); }
+            50% { box-shadow: 0 0 20px rgba(0,255,0,0.6); transform: scale(1.05); }
+        }
+
+        .inventory-slot:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(255,237,0,0.6);
+        }
+
+        /* Магазин - поява з глибини */
+        .shop-modal-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 6999;
+        }
+
+        .shop-modal {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.95);
+            border: 3px solid var(--green);
+            padding: 30px;
+            z-index: 7000;
+            min-width: 400px;
+            box-shadow: 0 0 50px rgba(0,255,0,0.4), inset 0 0 30px rgba(0,255,0,0.1);
+        }
+
+        .shop-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 10px 0;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--yellow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shop-item::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,237,0,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .shop-item:hover::before {
+            left: 100%;
+        }
+
+        .shop-item:hover {
+            background: rgba(255,237,0,0.15);
+            transform: translateX(5px);
+            box-shadow: -5px 0 15px rgba(255,237,0,0.3);
+        }
+
+        .shop-item button {
+            background: var(--green);
+            color: black;
+            padding: 5px 15px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shop-item button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .shop-item button:hover::before {
+            width: 200px;
+            height: 200px;
+        }
+
+        .shop-item button:hover {
+            background: #00ff00;
+            box-shadow: 0 0 20px rgba(0,255,0,0.6);
+            transform: scale(1.1);
+        }
+
+        .faction-info {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(255,237,0,0.1);
+            border: 2px solid var(--yellow);
+            text-align: center;
+            font-size: 0.9rem;
+            animation: factionGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes factionGlow {
+            0%, 100% { box-shadow: 0 0 5px rgba(255,237,0,0.3); }
+            50% { box-shadow: 0 0 15px rgba(255,237,0,0.5), inset 0 0 10px rgba(255,237,0,0.2); }
+        }
+
+        /* Скролбар стилізація */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--yellow);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255,237,0,0.5);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #fff;
+            box-shadow: 0 0 20px rgba(255,255,255,0.8);
+        }
     </style>
 </head>
 <body>
 
-    <header><h1 class="site-title" id="site-title">stalkrerUA-MODS</h1></header>
-    
-    <div class="auth-btn" onclick="openRegModal()" id="auth-btn">Реєстрація / Вхід</div>
-    <div class="options-btn" onclick="openOptionsModal()" id="opt-btn">Опції</div>
+    <div class="bg-layer" id="main-bg"></div>
 
-    <div class="main-content" style="display: flex; flex-direction: row; align-items: flex-start; gap: 40px; flex-wrap: wrap;">
-        <div style="flex: 1; min-width: 300px;">
-            <div class="game-card" onclick="openModModal('tch')">
-                <div class="icon-box">ТЧ</div>
-                <div class="game-info"><h2 id="tch-name">Тінь Чорнобиля</h2><p id="tch-sub">Натисни для вибору моду</p></div>
+    <div class="rank-board">
+        КЛІКИ: <span id="click-count">0</span> | РАНГ: <span id="rank-name">НОВАЧОК</span>
+    </div>
+
+    <div class="fullscreen-bg">
+        <div class="header-section">
+            <h1 class="title shine-text" onclick="addClick()">modLab-x</h1>
+            <div id="quote-display" class="quote-sub">"Хабар приніс?"</div>
+        </div>
+        
+        <!-- Градієнтна полоска під назвою -->
+        <div class="gradient-bar"></div>
+        
+        <!-- Спеціальні кнопки вгорі -->
+        <div class="special-buttons" style="margin-top: 20px;">
+            <div class="special-btn-wrapper gradient-border-frame">
+                <div class="gradient-border-content">
+                    <div class="card-btn" style="border: none; margin: 0;" onclick="openGame()">
+                        <div class="icon-square" style="background:var(--red)">МГ</div>
+                        <span>Міні-гра</span>
+                    </div>
+                </div>
             </div>
-            <div class="game-card" onclick="openModModal('cn')">
-                <div class="icon-box">ЧН</div>
-                <div class="game-info"><h2 id="cn-name">Чисте Небо</h2><p id="cn-sub">Натисни для вибору моду</p></div>
-            </div>
-            <div class="game-card" onclick="openModModal('zp')">
-                <div class="icon-box">ЗП</div>
-                <div class="game-info"><h2 id="zp-name">Поклик Прип'яті</h2><p id="zp-sub">Натисни для вибору моду</p></div>
+            
+            <div class="special-btn-wrapper gradient-border-frame">
+                <div class="gradient-border-content">
+                    <div class="card-btn" style="border: none; margin: 0;" onclick="openM('modal-shop')">
+                        <div class="icon-square" style="background:var(--green)">$</div>
+                        <span>Сидорович</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div style="flex: 1; text-align: center;">
-            <img src="1.jpg" style="width: 100%; max-width: 600px; border: 2px solid #ffd700; border-radius: 15px;">
+        
+        <!-- Градієнтна полоска над панеллю -->
+        <div class="gradient-bar" style="margin: 20px 0;"></div>
+        
+        <div class="panel">
+            <div class="card-btn" onclick="openM('modal-tch')"><div class="icon-square">ТЧ</div><span>Тінь Чорнобиля</span></div>
+            <div class="card-btn" onclick="openM('modal-cn')"><div class="icon-square">ЧН</div><span>Чисте Небо</span></div>
+            <div class="card-btn" onclick="openM('modal-zp')"><div class="icon-square">ЗП</div><span>Поклик Прип'яті</span></div>
+            
+            <div class="card-btn" style="border-color: var(--neon);" onclick="openM('modal-guides')"><div class="icon-square" style="background:var(--neon)">Г</div><span>Гайди</span></div>
+            <div class="card-btn" style="border-color: var(--neon);" onclick="openM('modal-map')"><div class="icon-square" style="background:var(--neon)">М</div><span>Мапа</span></div>
+            <div class="card-btn" style="border-color: var(--neon);" onclick="openM('modal-dev')"><div class="icon-square" style="background:var(--neon)">Р</div><span>Розробка</span></div>
+            
+            <div class="card-btn" style="border-color: var(--neon);" onclick="openM('modal-settings')"><div class="icon-square" style="background:var(--neon)">НЛ</div><span>Налаштування</span></div>
+        </div>
+
+        <div class="author-section">
+            <div class="author-text">АВТОР: МАКСИМ КОСЬКОВЕЦЬКИЙ</div>
         </div>
     </div>
 
-    <div id="optionsModal" class="modal">
-        <div class="modal-content" style="max-width: 400px; height: auto;">
-            <span class="close" onclick="closeModal('optionsModal')">&times;</span>
-            <h2 style="color:#ffd700">Налаштування</h2>
-            <p>Мова: 
-                <select id="langSelect" onchange="changeLanguage()" style="padding: 5px;">
-                    <option value="uk">Українська</option>
-                    <option value="en">English</option>
-                </select>
-            </p>
-            <p>Тема: <button onclick="document.body.classList.toggle('light-theme')" style="padding: 5px 15px; cursor:pointer;">Змінити тему</button></p>
+    <!-- МІНІ-ГРА -->
+    <div id="game-modal">
+        <div class="game-container">
+            <div class="game-area" id="game-area"></div>
+            
+            <div class="game-sidebar">
+                <h2 style="color: var(--yellow); margin-top: 0;">МЕНЮ ГРИ</h2>
+                
+                <div class="game-menu-btns">
+                    <button class="back-btn" onclick="closeGame()">← ВИЙТИ</button>
+                    <button class="card-btn" style="width: 100%; justify-content: center;" onclick="openShop()">💰 МАГАЗИН</button>
+                    <button class="card-btn" style="width: 100%; justify-content: center;" onclick="nextLocation()">→ НАСТУПНА ЛОКАЦІЯ</button>
+                </div>
+
+                <div style="background: rgba(0,255,0,0.1); padding: 15px; border: 2px solid var(--green); margin: 15px 0;">
+                    <div style="font-size: 0.9rem; margin-bottom: 10px;">
+                        💰 Гроші: <span id="game-money">0</span> грн
+                    </div>
+                    <div style="font-size: 0.9rem; margin-bottom: 10px;">
+                        📍 Локація: <span id="location-name">Кордон</span>
+                    </div>
+                    <div style="font-size: 0.9rem; padding-top: 10px; border-top: 1px solid var(--green);">
+                        👥 Група: <span id="game-faction" style="color: var(--red);">ІЗГОЙ</span>
+                    </div>
+                </div>
+
+                <div class="inventory-section">
+                    <h3 style="margin-top: 0; color: var(--yellow);">ІНВЕНТАР (<span id="inv-count">0</span>/<span id="inv-max">5</span>)</h3>
+                    <div id="inventory-grid"></div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: rgba(255,0,0,0.1); border: 2px solid var(--red);">
+                    <h3 style="margin-top: 0; color: var(--red);">КОНСОЛЬ</h3>
+                    <button class="card-btn" style="width: 100%; margin: 5px 0; background: rgba(255,0,0,0.2);" onclick="cheatMoney()">💰 Видати 1000 грн</button>
+                    <button class="card-btn" style="width: 100%; margin: 5px 0; background: rgba(255,0,0,0.2);" onclick="cheatArtifact('ar')">🔮 Видати Медузу</button>
+                    <button class="card-btn" style="width: 100%; margin: 5px 0; background: rgba(255,0,0,0.2);" onclick="cheatArtifact('ar2')">💎 Видати Камн. Цвіток</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- МАГАЗИН -->
+        <div id="shop-modal-backdrop" class="shop-modal-backdrop" onclick="closeShop()"></div>
+        <div id="shop-modal" class="shop-modal">
+            <h2 style="color: var(--green); text-align: center;">МАГАЗИН</h2>
+            
+            <div style="border-bottom: 2px solid var(--yellow); padding-bottom: 15px; margin-bottom: 15px;">
+                <h3 style="color: var(--yellow);">Продати артефакти:</h3>
+                <div class="shop-item">
+                    <span>Медуза</span>
+                    <span style="color: var(--green);">10 грн</span>
+                    <button onclick="sellArtifact('ar', 10)">ПРОДАТИ</button>
+                </div>
+                <div class="shop-item">
+                    <span>Камінний Цвіток</span>
+                    <span style="color: var(--green);">15 грн</span>
+                    <button onclick="sellArtifact('ar2', 15)">ПРОДАТИ</button>
+                </div>
+            </div>
+
+            <div style="border-bottom: 2px solid var(--yellow); padding-bottom: 15px; margin-bottom: 15px;">
+                <h3 style="color: var(--yellow);">Покращення:</h3>
+                <div class="shop-item">
+                    <span>Рюкзак +1 слот</span>
+                    <span style="color: var(--green);">20 грн</span>
+                    <button onclick="buyBackpack()">КУПИТИ</button>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="color: var(--yellow);">Купити групування:</h3>
+                <div class="shop-item">
+                    <span>Моноліт</span>
+                    <span style="color: var(--green);">20 грн</span>
+                    <button onclick="buyFaction('МОНОЛІТ', 20)">КУПИТИ</button>
+                </div>
+                <div class="shop-item">
+                    <span>Бандити</span>
+                    <span style="color: var(--green);">25 грн</span>
+                    <button onclick="buyFaction('БАНДИТИ', 25)">КУПИТИ</button>
+                </div>
+                <div class="shop-item">
+                    <span>Зомбі</span>
+                    <span style="color: var(--green);">30 грн</span>
+                    <button onclick="buyFaction('ЗОМБІ', 30)">КУПИТИ</button>
+                </div>
+                <div class="shop-item">
+                    <span>Сталкери</span>
+                    <span style="color: var(--green);">199 грн</span>
+                    <button onclick="buyFaction('СТАЛКЕРИ', 199)">КУПИТИ</button>
+                </div>
+            </div>
+
+            <button class="back-btn" style="width: 100%; margin-top: 20px;" onclick="closeShop()">ЗАКРИТИ</button>
         </div>
     </div>
 
-    <div id="regModal" class="modal">
-        <div class="modal-content" style="max-width: 450px; height: auto;">
-            <span class="close" onclick="closeModal('regModal')">&times;</span>
-            <h2 style="color: #ffd700; text-align: center;">Реєстрація</h2>
-            <input type="text" placeholder="Логін" style="width:100%; padding:10px; margin-bottom:10px;">
-            <button style="width:100%; padding:10px; background:#ffd700; border:none; cursor:pointer;">OK</button>
+    <!-- Традиційні модалки -->
+    <div id="modal-shop" class="modal">
+        <div class="game-top"><span>БУНКЕР</span><button class="back-btn" onclick="closeM('modal-shop')">X</button></div>
+        <div class="scroll-area">
+            <div style="background:#111; padding:20px; border:2px solid var(--yellow); width:380px; margin-top:40px;">
+                <div style="display:flex; justify-content:space-between; margin:10px 0;"><span>Сталкер</span> <b>150</b> <button class="back-btn" style="background:var(--green)" onclick="buyRank('СТАЛКЕР', 150)">КУПИТИ</button></div>
+                <div style="display:flex; justify-content:space-between; margin:10px 0;"><span>Стрілець</span> <b>250</b> <button class="back-btn" style="background:var(--green)" onclick="buyRank('СТРІЛЕЦЬ', 250)">КУПИТИ</button></div>
+                <div style="display:flex; justify-content:space-between; margin:10px 0;"><span>Легенда</span> <b>310</b> <button class="back-btn" style="background:var(--green)" onclick="buyRank('ЛЕГЕНДА', 310)">КУПИТИ</button></div>
+                <div style="display:flex; justify-content:space-between; margin:10px 0;"><span>Скіф</span> <b>390</b> <button class="back-btn" style="background:var(--green)" onclick="buyRank('СКІФ', 390)">КУПИТИ</button></div>
+                <div style="display:flex; justify-content:space-between; margin:10px 0;"><span>ЧЕМПІОН</span> <b>599</b> <button class="back-btn" style="background:var(--green)" onclick="buyRank('ЧЕМПІОН', 599)">КУПИТИ</button></div>
+                <button class="back-btn" style="width:100%; margin-top:20px;" onclick="closeM('modal-shop')">ВИЙТИ</button>
+            </div>
         </div>
     </div>
+
+    <div id="modal-settings" class="modal">
+        <div class="game-top"><span>НАЛАШТУВАННЯ</span><button class="back-btn" onclick="closeM('modal-settings')">X</button></div>
+        <div class="scroll-area">
+            <div style="background:#111; padding:20px; border:2px solid var(--yellow); width:400px; margin-top:40px;">
+                <h3 style="color: var(--yellow); margin-top: 0;">Готові Обої:</h3>
+                <button class="card-btn" style="width:100%; margin:5px 0;" onclick="setBg('1.jpg')">Кордон</button>
+                <button class="card-btn" style="width:100%; margin:5px 0;" onclick="setBg('4.jpg')">Прип'ять</button>
+                
+                <h3 style="color: var(--yellow); margin-top: 20px;">Свої Обої:</h3>
+                <input type="file" id="custom-wallpaper" accept="image/*" style="display: none;" onchange="uploadCustomWallpaper(event)">
+                <button class="card-btn" style="width:100%; margin:5px 0;" onclick="document.getElementById('custom-wallpaper').click()">📁 ЗАВАНТАЖИТИ СВОЄ ФОТО</button>
+                <div id="wallpaper-status" style="color: var(--green); margin-top: 10px; text-align: center; font-size: 0.85rem;"></div>
+                
+                <button class="back-btn" style="width:100%; margin-top:30px;" onclick="resetAll()">СКИНУТИ ВСЕ</button>
+                <button class="back-btn" style="width:100%; margin-top:10px;" onclick="closeM('modal-settings')">ВИЙТИ</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-tch" class="modal"><div class="game-top"><span>ТЧ</span><button class="back-btn" onclick="closeM('modal-tch')">X</button></div><div class="scroll-area"><div class="site-crop"><iframe src="https://stalker-news.info/category/mods/modyfikatsii-dlia-tch/"></iframe></div></div></div>
+    <div id="modal-cn" class="modal"><div class="game-top"><span>ЧН</span><button class="back-btn" onclick="closeM('modal-cn')">X</button></div><div class="scroll-area"><div class="site-crop"><iframe src="https://stalker-news.info/category/mods/modyfikatsii-dlia-chn/"></iframe></div></div></div>
+    <div id="modal-zp" class="modal"><div class="game-top"><span>ЗП</span><button class="back-btn" onclick="closeM('modal-zp')">X</button></div><div class="scroll-area"><div class="site-crop"><iframe src="https://stalker-news.info/category/mods/modyfikatsii-dlia-pp/"></iframe></div></div></div>
+    <div id="modal-guides" class="modal"><div class="game-top"><span>ГАЙДИ</span><button class="back-btn" onclick="closeM('modal-guides')">X</button></div><div class="scroll-area"><div class="site-crop"><iframe src="https://stalker-news.info/forum/dopomoha-z-prokhodzhenniam-modiv-hajdy-instruktsii/"></iframe></div></div></div>
+    <div id="modal-dev" class="modal"><div class="game-top"><span>РОЗРОБКА</span><button class="back-btn" onclick="closeM('modal-dev')">X</button></div><div class="scroll-area"><iframe style="margin-top:0;" src="https://gasphi.fifo.v.ua/articles/jak-samomu-stvoriti-moddlja-stalkera.html"></iframe></div></div>
+    <div id="modal-map" class="modal"><div class="game-top"><span>МАПА</span><button class="back-btn" onclick="closeM('modal-map')">X</button></div><div class="scroll-area"><iframe style="margin-top:0;" src="https://map.stalker.wiki/"></iframe></div></div>
 
     <script>
-        function openOptionsModal() { document.getElementById('optionsModal').style.display = "block"; }
-        function openRegModal() { document.getElementById('regModal').style.display = "block"; }
-        function closeModal(id) { document.getElementById(id).style.display = "none"; }
+        let clicks = 0;
+        const quotes = ["Хабар приніс?", "Зона — це не пікнік.", "Вдалого полювання...", "Викид близько!", "Йди своєю дорогою, Сталкер."];
 
-        function changeLanguage() {
-            const lang = document.getElementById('langSelect').value;
-            if (lang === 'en') {
-                document.getElementById('site-title').innerText = "STALKER-UA-MODS";
-                document.getElementById('auth-btn').innerText = "Login / Reg";
-                document.getElementById('opt-btn').innerText = "Options";
-                document.getElementById('tch-name').innerText = "Shadow of Chernobyl";
-                document.getElementById('cn-name').innerText = "Clear Sky";
-                document.getElementById('zp-name').innerText = "Call of Pripyat";
-            } else {
+        // Завантаження збережених даних
+        function loadData() {
+            const savedClicks = localStorage.getItem('stalker_clicks');
+            const savedMoney = localStorage.getItem('stalker_money');
+            const savedRank = localStorage.getItem('stalker_rank');
+            const savedFaction = localStorage.getItem('stalker_faction');
+            const savedMaxInv = localStorage.getItem('stalker_maxinv');
+            
+            if (savedClicks) {
+                clicks = parseInt(savedClicks);
+                document.getElementById('click-count').innerText = clicks;
+            }
+            if (savedMoney) {
+                gameMoney = parseInt(savedMoney);
+                document.getElementById('game-money').innerText = gameMoney;
+            }
+            if (savedRank) {
+                document.getElementById('rank-name').innerText = savedRank;
+                document.getElementById('rank-name').style.color = "var(--green)";
+            }
+            if (savedFaction) {
+                faction = savedFaction;
+                document.getElementById('game-faction').innerText = savedFaction;
+                document.getElementById('game-faction').style.color = "var(--green)";
+            }
+            if (savedMaxInv) {
+                maxInventory = parseInt(savedMaxInv);
+                updateInventory();
+            }
+        }
+
+        // Збереження даних
+        function saveData() {
+            localStorage.setItem('stalker_clicks', clicks);
+            localStorage.setItem('stalker_money', gameMoney);
+            localStorage.setItem('stalker_rank', document.getElementById('rank-name').innerText);
+            localStorage.setItem('stalker_faction', faction);
+            localStorage.setItem('stalker_maxinv', maxInventory);
+        }
+
+        function newQuote() {
+            document.getElementById('quote-display').innerText = `"${quotes[Math.floor(Math.random() * quotes.length)]}"`;
+        }
+        setInterval(newQuote, 7000);
+
+        function addClick() {
+            clicks++;
+            document.getElementById('click-count').innerText = clicks;
+            saveData();
+        }
+
+        function openM(id) { document.getElementById(id).style.display = "block"; }
+        function closeM(id) { document.getElementById(id).style.display = "none"; }
+        function setBg(file) { 
+            document.getElementById('main-bg').style.backgroundImage = `url('${file}')`;
+            localStorage.setItem('custom_wallpaper', '');
+        }
+
+        function uploadCustomWallpaper(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageData = e.target.result;
+                    localStorage.setItem('custom_wallpaper', imageData);
+                    document.getElementById('main-bg').style.backgroundImage = `url('${imageData}')`;
+                    document.getElementById('wallpaper-status').innerText = '✓ Обої завантажено!';
+                    setTimeout(() => {
+                        document.getElementById('wallpaper-status').innerText = '';
+                    }, 3000);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function loadCustomWallpaper() {
+            const customWallpaper = localStorage.getItem('custom_wallpaper');
+            if (customWallpaper) {
+                document.getElementById('main-bg').style.backgroundImage = `url('${customWallpaper}')`;
+            }
+        }
+
+        function resetAll() {
+            if (confirm("Скинути всі збережені дані? Це видалить кліки, гроші, ранг та групування.")) {
+                localStorage.clear();
                 location.reload();
             }
         }
 
-        window.onclick = function(e) {
-            if(e.target.className === 'modal') e.target.style.display = "none";
+        function buyRank(name, price) {
+            if (clicks >= price) {
+                clicks -= price;
+                document.getElementById('click-count').innerText = clicks;
+                document.getElementById('rank-name').innerText = name;
+                document.getElementById('rank-name').style.color = "var(--green)";
+                saveData();
+            } else { alert("Грошей мало! Треба більше хабара."); }
         }
+
+        // МІНІ-ГРА
+        let gameMoney = 0;
+        let currentLocation = 0;
+        let maxInventory = 5;
+        let inventory = [];
+        let artifactSpawnTimer = null;
+        let activeArtifacts = [];
+        let faction = "ІЗГОЙ";
+
+        const locations = [
+            { name: "Кордон", bg: "kor.jpg" },
+            { name: "Агропром", bg: "kor2.jpg" },
+            { name: "Прип'ять", bg: "kor3.jpg" }
+        ];
+
+        function openGame() {
+            document.getElementById('game-modal').style.display = 'block';
+            updateLocation();
+            startArtifactSpawning();
+        }
+
+        function closeGame() {
+            document.getElementById('game-modal').style.display = 'none';
+            stopArtifactSpawning();
+            clearArtifacts();
+        }
+
+        function updateLocation() {
+            const loc = locations[currentLocation];
+            document.getElementById('location-name').innerText = loc.name;
+            document.getElementById('game-area').style.backgroundImage = `url('${loc.bg}')`;
+        }
+
+        function nextLocation() {
+            currentLocation = (currentLocation + 1) % locations.length;
+            updateLocation();
+            clearArtifacts();
+        }
+
+        function startArtifactSpawning() {
+            artifactSpawnTimer = setInterval(spawnArtifact, 20000);
+        }
+
+        function stopArtifactSpawning() {
+            if (artifactSpawnTimer) {
+                clearInterval(artifactSpawnTimer);
+                artifactSpawnTimer = null;
+            }
+        }
+
+        function spawnArtifact() {
+            const types = ['ar', 'ar2'];
+            const type = types[Math.floor(Math.random() * types.length)];
+            
+            const gameArea = document.getElementById('game-area');
+            const artifact = document.createElement('div');
+            artifact.className = 'artifact';
+            artifact.style.backgroundImage = `url('${type}.jpg')`;
+            artifact.style.left = Math.random() * (gameArea.offsetWidth - 50) + 'px';
+            artifact.style.top = Math.random() * (gameArea.offsetHeight - 50) + 'px';
+            artifact.dataset.type = type;
+            
+            artifact.onclick = function() {
+                collectArtifact(artifact);
+            };
+            
+            gameArea.appendChild(artifact);
+            activeArtifacts.push(artifact);
+            
+            setTimeout(() => {
+                if (artifact.parentNode) {
+                    artifact.remove();
+                    activeArtifacts = activeArtifacts.filter(a => a !== artifact);
+                }
+            }, 10000);
+        }
+
+        function collectArtifact(artifactEl) {
+            if (inventory.length >= maxInventory) {
+                alert("Інвентар повний! Продайте артефакти або купіть більший рюкзак.");
+                return;
+            }
+            
+            const type = artifactEl.dataset.type;
+            inventory.push(type);
+            artifactEl.remove();
+            activeArtifacts = activeArtifacts.filter(a => a !== artifactEl);
+            updateInventory();
+        }
+
+        function clearArtifacts() {
+            activeArtifacts.forEach(a => a.remove());
+            activeArtifacts = [];
+        }
+
+        function updateInventory() {
+            const grid = document.getElementById('inventory-grid');
+            grid.innerHTML = '';
+            
+            for (let i = 0; i < maxInventory; i++) {
+                const slot = document.createElement('div');
+                slot.className = 'inventory-slot';
+                
+                if (i < inventory.length) {
+                    slot.classList.add('filled');
+                    slot.style.backgroundImage = `url('${inventory[i]}.jpg')`;
+                }
+                
+                grid.appendChild(slot);
+            }
+            
+            document.getElementById('inv-count').innerText = inventory.length;
+            document.getElementById('inv-max').innerText = maxInventory;
+        }
+
+        function openShop() {
+            document.getElementById('shop-modal-backdrop').style.display = 'block';
+            document.getElementById('shop-modal').style.display = 'block';
+        }
+
+        function closeShop() {
+            document.getElementById('shop-modal-backdrop').style.display = 'none';
+            document.getElementById('shop-modal').style.display = 'none';
+        }
+
+        function sellArtifact(type, price) {
+            const index = inventory.indexOf(type);
+            if (index > -1) {
+                inventory.splice(index, 1);
+                gameMoney += price;
+                document.getElementById('game-money').innerText = gameMoney;
+                updateInventory();
+                saveData();
+                alert(`Продано за ${price} грн!`);
+            } else {
+                alert("У вас немає цього артефакту!");
+            }
+        }
+
+        function buyBackpack() {
+            if (gameMoney >= 20) {
+                gameMoney -= 20;
+                maxInventory += 1;
+                document.getElementById('game-money').innerText = gameMoney;
+                updateInventory();
+                saveData();
+                alert("Рюкзак покращено! +1 слот");
+            } else {
+                alert("Недостатньо грошей!");
+            }
+        }
+
+        function buyFaction(name, price) {
+            if (gameMoney >= price) {
+                gameMoney -= price;
+                faction = name;
+                document.getElementById('game-money').innerText = gameMoney;
+                document.getElementById('game-faction').innerText = name;
+                document.getElementById('game-faction').style.color = "var(--green)";
+                saveData();
+                alert(`Ви приєдналися до ${name}!`);
+            } else {
+                alert("Недостатньо грошей!");
+            }
+        }
+
+        // Ініціалізація інвентаря
+        updateInventory();
+
+        // Чіт-функції для консолі
+        function cheatMoney() {
+            gameMoney += 1000;
+            document.getElementById('game-money').innerText = gameMoney;
+            saveData();
+            alert("Видано 1000 грн!");
+        }
+
+        function cheatArtifact(type) {
+            if (inventory.length >= maxInventory) {
+                alert("Інвентар повний! Спочатку звільніть місце.");
+                return;
+            }
+            inventory.push(type);
+            updateInventory();
+            const name = type === 'ar' ? 'Медуза' : 'Камінний Цвіток';
+            alert(`Видано артефакт: ${name}!`);
+        }
+
+        // Завантаження даних при старті
+        window.onload = function() {
+            loadData();
+            loadCustomWallpaper();
+        };
     </script>
 </body>
 </html>
